@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @panorama.name %>
+</p>
+
+<p>
+  <strong>User:</strong>
+  <%= @panorama.user %>
+</p>
+
+<%= link_to 'Edit', edit_panorama_path(@panorama) %> |
+<%= link_to 'Back', panoramas_path %>
