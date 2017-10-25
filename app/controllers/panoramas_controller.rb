@@ -29,6 +29,7 @@ class PanoramasController < ApplicationController
   # POST /panoramas.json
   def create
     @panorama = Panorama.new(panorama_params)
+    @panorama.user = current_user
 
     respond_to do |format|
       if @panorama.save
