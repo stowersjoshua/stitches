@@ -2,16 +2,15 @@
 <html>
 <head>
   <title>Stitches</title>
-  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= stylesheet_link_tag  'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
-<meta name="viewport" content="width=device-width, initial-scale=1"/></head>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/></head>
 <body>
-<%= render partial: "elements/navbar" %>
-<%= bootstrap_flash %>
-
-
-<%= yield %>
-
+<div class="container" id="body-container">
+  <%= render partial: 'elements/navbar' %>
+  <%= bootstrap_flash %>
+  <%= yield %>
+</div>
 </body>
 </html>

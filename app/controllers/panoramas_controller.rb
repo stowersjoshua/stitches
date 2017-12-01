@@ -1,8 +1,5 @@
 class PanoramasController < ApplicationController
-
-  #->Prelang (scaffolding:rails/scope_to_user)
   before_filter :require_user_signed_in, only: [:new, :edit, :create, :update, :destroy]
-
   before_action :set_panorama, only: [:show, :edit, :update, :destroy]
 
   # GET /panoramas
@@ -13,7 +10,9 @@ class PanoramasController < ApplicationController
 
   # GET /panoramas/1
   # GET /panoramas/1.json
+  include ActionController::Live
   def show
+
   end
 
   # GET /panoramas/new
@@ -66,14 +65,39 @@ class PanoramasController < ApplicationController
     end
   end
 
-  private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_panorama
-      @panorama = Panorama.find(params[:id])
-    end
+  def instantiate_stitch
+    `pto_gen public/uploads/panorama/photos/#{params[:id]}/* -o project.pto`
+    `cpfind -o project.pto --multirow --celeste project.pto`
+    `cpclean -o project.pto project.pto`
+    `linefind -o project.pto project.pto`
+    `autooptimiser -a -m -l -s -o project.pto project.pto`
+    `pano_modify --canvas=AUTO --crop=AUTO -o project.pto project.pto`
+    `hugin_executor --stitching --prefix=prefix project.pto`
+    `nona -m PNG -o project-#{params[:id]} project.pto`
+    `rm project.pto`
+    `mv project-#{params[:id]}.png ./public/`
+    redirect_to panorama_path(params[:id])
+  end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def panorama_params
-      params.require(:panorama).permit(:name, :user_id)
-    end
+  # def instantiate_stitch
+  #   response.headers['Content-Type'] = 'text/event-stream'
+  #   3.times {
+  #     response.stream.write "data: hello world\n\n", 'stitch_event'
+  #     sleep 1
+  #   }
+  # rescue IOError
+  #   Rails.logger.info 'Stitching stream closed'
+  # ensure
+  #   response.stream.close
+  # end
+
+  private
+
+  def set_panorama
+    @panorama = Panorama.find(params[:id])
+  end
+
+  def panorama_params
+    params.require(:panorama).permit(:name, photos: [])
+  end
 end

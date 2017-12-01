@@ -1,5 +1,6 @@
 class Panorama < ActiveRecord::Base
+  mount_uploaders :photos, PhotoUploader
+  serialize :photos, JSON
+
   belongs_to :user
-  has_many :photos
-  has_one :photo
 end
