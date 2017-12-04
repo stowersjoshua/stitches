@@ -1,58 +1,58 @@
-class PhotoUploader < CarrierWave::Uploader::Base
+# require 'pathname'
 
-  # Include RMagick or MiniMagick support:
-  # include CarrierWave::RMagick
+class PhotoUploader < CarrierWave::Uploader::Base
   include CarrierWave::MiniMagick
 
-  # Choose what kind of storage to use for this uploader:
   storage :file
-  # storage :fog
 
   def auto_orient
-    manipulate! do |img|
-      img.auto_orient
-      img
+    Rails.logger.info '~~~~~~~~~~~~~~~~ auto orient'
+    manipulate! do |image|
+      image.auto_orient
+      image
     end
   end
 
-  process :auto_orient
 
-  # Override the directory where uploaded files will be stored.
-  # This is a sensible default for uploaders that are meant to be mounted:
+  # def set_position
+  #   Rails.logger.info '~~~~~~~~~~~~~~~~ set position'
+  #   binding.pry
+  #   manipulate! do |image, index, options|
+  #     options[:write] = { position: index }
+  #     image
+  #   end
+  # end
+  
+  process :auto_orient #, :set_position
+
   def store_dir
     "uploads/#{model.class.to_s.underscore}/#{mounted_as}/#{model.id}"
   end
 
-  # Provide a default URL as a default if there hasn't been a file uploaded:
-  # def default_url(*args)
-  #   # For Rails 3.1+ asset pipeline compatibility:
-  #   # ActionController::Base.helpers.asset_path("fallback/" + [version_name, "default.png"].compact.join('_'))
+  # def extension_whitelist
+  #   %w(jpg JPG jpeg JPEG png PNG)
+  # end
   #
-  #   "/images/fallback/" + [version_name, "default.png"].compact.join('_')
-  # end
-
-  # Process files as they are uploaded:
-  # process scale: [200, 300]
-  #
-  # def scale(width, height)
-  #   # do something
-  # end
-
-  # Create different versions of your uploaded files:
-  # version :thumb do
-  #   process resize_to_fit: [50, 50]
-  # end
-
-  # Add a white list of extensions which are allowed to be uploaded.
-  # For images you might use something like this:
-  def extension_whitelist
-    %w(jpg JPG jpeg JPEG png PNG)
-  end
-
-  # Override the filename of the uploaded files:
-  # Avoid using model.id or version_name here, see uploader/store.rb for details.
   # def filename
-  #   "something.jpg" if original_filename
+  #   Rails.logger.info "~~~~~~~~ Reading file name for #{original_filename}"
+  #   "image-#{image_id}.#{extension}"
+  #   Rails.logger.info "~~~~~~~~ ID is #{image_id}"
   # end
-
+  #
+  # def image_id
+  #   return 1 unless directory_exists?
+  #   Pathname.new(store_dir).children.count.next
+  #   Rails.logger.info "~~~~~~~~ Setting image ID for #{original_filename}"
+  # end
+  #
+  # def directory_exists?
+  #   Rails.logger.info "~~~~~~~~ Directory name: #{store_dir}"
+  #   Rails.logger.info "~~~~~~~~ Directory exists? #{File.directory? store_dir}"
+  #   File.directory? store_dir
+  # end
+  #
+  # def extension
+  #   return 'jpg' unless original_filename.present?
+  #   original_filename.split('.').last
+  # end
 end
