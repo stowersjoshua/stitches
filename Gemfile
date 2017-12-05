@@ -51,6 +51,7 @@ gem 'bootstrap-sass-extras'
 gem 'simple_form'
 gem 'tzinfo-data'
 gem 'validates_formatting_of'
+gem 'sortable-rails'
 
 group :development, :test do
   gem 'dotenv-rails'

@@ -1,38 +1,48 @@
 <div class="well">
-  <%= form_for @panorama, html: {class: 'form-horizontal form-model'} do |f| %>
-      <div class="form-group">
-        <%= f.label :name, class: 'control-label col-md-2' %>
-        <div class="col-md-10">
-          <%= f.text_field :name, class: 'text-field form-control' %>
+  <%= form_for @panorama, html: {class: 'form-horizontal form-model panorama-form'} do |f| %>
+
+      <div class="grid-sizing">
+        <div class="form-group">
+          <%= f.label :name, class: 'control-label col-md-2' %>
+          <div class="col-md-10">
+            <%= f.text_field :name, class: 'text-field form-control' %>
+          </div>
+        </div>
+        <div class="form-group">
+          <%= f.label :photos, class: 'control-label col-md-2' %>
+          <div class="col-md-10">
+            <%= f.file_field :photos, multiple: true, class: 'btn btn-default photo-input' %>
+          </div>
+        </div>
+        <p>In order to stitch your images, we need to know the size of the grid. How many photos across?</p>
+        <div class="form-group">
+          <label class="control-label col-md-2">Grid Width</label>
+          <div class="col-md-10">
+            <%= f.number_field :column_count, class: 'text-field form-control grid-width' %>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <div class='col-md-offset-2 col-md-10'>
+            <div class="btn btn-primary set-grid-size">Set Size</div>
+          </div>
         </div>
       </div>
 
-      <div class="form-group">
-        <%= f.label :photos, class: 'control-label col-md-2' %>
-        <div class="col-md-10">
-          <%= f.file_field :photos, multiple: true, class: 'btn btn-default' %>
-        </div>
-      </div>
+      <div class="grid-production">
 
-      <div class="form-group">
-        <label class="control-label col-md-2">width</label>
-        <div class="col-md-10">
-          <%= text_field 'width', class: 'text-field form-control' %>
-        </div>
-      </div>
+        <div id="target"></div>
 
-      <div class="form-group">
-        <label class="control-label col-md-2">height</label>
-        <div class="col-md-10">
-          <%= text_field 'height', class: 'text-field form-control' %>
-        </div>
-      </div>
+        <!--<input class="text-field form-control hidden" type="text" name="panorama[image_order]" id="panorama_image_order">-->
+        <%= f.hidden_field :image_order %>
 
-      <div class="form-group">
-        <div class='col-md-offset-2 col-md-10'>
-          <%= f.submit nil, class: 'btn btn-primary' %>
-          <%= link_to t('.cancel', default: t("helpers.links.cancel")),
-                      panoramas_path, class: 'btn btn-default' %>
+        <div class="form-group">
+          <div class='col-md-offset-2 col-md-10'>
+            <div class="btn btn-primary set-order">Set Order</div>
+            <%= f.submit nil, class: 'btn btn-primary submit hidden' %>
+            <%= link_to t('.cancel', default: t("helpers.links.cancel")),
+                        panoramas_path, class: 'btn btn-default' %>
+          </div>
         </div>
       </div>
   <% end %>
