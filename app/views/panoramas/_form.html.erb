@@ -31,14 +31,14 @@
 
       <div class="grid-production">
 
+        <p>Rearrange the images to the correct order.</p>
         <div id="target"></div>
 
-        <!--<input class="text-field form-control hidden" type="text" name="panorama[image_order]" id="panorama_image_order">-->
         <%= f.hidden_field :image_order %>
 
         <div class="form-group">
-          <div class='col-md-offset-2 col-md-10'>
-            <div class="btn btn-primary set-order">Set Order</div>
+          <div class='col-md-10 panorama-form-actions'>
+            <div class="btn btn-primary set-order">Stitch Photos</div>
             <%= f.submit nil, class: 'btn btn-primary submit hidden' %>
             <%= link_to t('.cancel', default: t("helpers.links.cancel")),
                         panoramas_path, class: 'btn btn-default' %>

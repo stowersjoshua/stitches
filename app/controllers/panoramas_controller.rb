@@ -5,7 +5,7 @@ class PanoramasController < ApplicationController
   # GET /panoramas
   # GET /panoramas.json
   def index
-    @panoramas = Panorama.all
+    @panoramas = current_user.panoramas
   end
 
   # GET /panoramas/1

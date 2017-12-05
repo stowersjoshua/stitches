@@ -1,28 +1,23 @@
 <%- model_class = Panorama -%>
 <div class="page-header">
-  <h1><%=t '.title', :default => Panorama %></h1>
+  <%= link_to t('.new', default: t("helpers.links.new")), new_panorama_path, class: 'btn btn-primary pull-right' %>
+  <h1><%=t '.title', :default => Stitches %></h1>
+  <div class="clearfix"></div>
 </div>
-<table class="table table-striped">
-  <thead>
-    <tr>
-      <th><%= model_class.human_attribute_name(:name) %></th>
-      <th><%= model_class.human_attribute_name(:photos) %></th>
-      <th><%=t '.actions', :default => t("helpers.actions") %></th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @panoramas.each do |panorama| %>
-      <tr>
-        <td><%= link_to panorama.name, panorama_path(panorama) %></td>
-        <td><%= panorama.photos.count %></td>
-        <td>
-          <%= link_to 'view', panorama_path(panorama) %> |
-          <%= link_to 'edit', edit_panorama_path(panorama), class: 'btn btn-xs', title: "#{ t('.show', default: t('helpers.links.show')) }" %> |
-          <%= link_to 'remove', panorama_path(panorama), method: :delete, data: { confirm: t('.confirm', default: t("helpers.links.confirm", default: 'Are you sure?')) }, class: 'btn btn-xs', title: "#{ t('.destroy', default: t('helpers.links.destroy')) }" %>
-        </td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<%= link_to t('.new', default: t("helpers.links.new")), new_panorama_path, class: 'btn btn-primary' %>
+<div class="table table-striped panoramas">
+  <% @panoramas.each_slice(4) do |panorama_slice| %>
+      <div class="row">
+        <% panorama_slice.each() do |panorama| %>
+            <div class="col-lg-4 col-sm-6 col-xs-12 panorama">
+              <%= link_to panorama_path(panorama) do %>
+                  <% path = "/project-#{panorama.id}.png" %>
+                  <div style="background-image: url('<%= path %>');"></div>
+              <% end %>
+            </div>
+        <% end %>
+      </div>
+  <% end %>
+  <% if @panoramas.empty? %>
+    <p>Click the "New" button to start stitching images.</p>
+  <% end %>
+</div>
