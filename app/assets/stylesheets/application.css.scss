@@ -34,3 +34,70 @@
 .prettyprint.photo img {
   //max-width: 300px;
 }
+
+.jumbotron {
+  text-align: center;
+  background: #fafafa;
+}
+
+.btn-lg, .btn-primary, .btn-default, .btn-danger, .btn-warning {
+  border-radius: 0;
+}
+
+#body-container {
+  margin-top: 0;
+}
+
+.navbar-default {
+  border: none;
+  background-color: $brand-primary;
+  border-radius: 0;
+  .navbar-brand, .navbar-nav li a {
+    color: $body-bg;
+    &:hover, &:focus {
+      color: $body-bg;
+      opacity: 0.5;
+    }
+  }
+  .navbar-nav > .dropdown > .dropdown-menu > li > a {
+    color: $text-color;
+  }
+  .navbar-nav > .dropdown > .dropdown-menu > li > a {
+    color: $body-bg;
+    &:hover, &:focus {
+      color: $body-bg;
+      opacity: 0.5;
+    }
+  }
+  .navbar-toggle {
+    .icon-bar {
+      background-color: $body-bg;
+    }
+    &:hover, &:focus {
+      .icon-bar {
+        background-color: $text-color;
+      }
+    }
+  }
+}
+
+.navbar-background {
+  background-color: $brand-primary;
+  height: 50px;
+  width: 100vw;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.well h2 {
+  margin-top: 0;
+}
+
+.flash-container {
+  position: absolute;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  max-width: 400px;
+}

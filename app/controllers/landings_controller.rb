@@ -1,4 +1,5 @@
 class LandingsController < ApplicationController
+  layout 'no_nav'
   before_filter :redirect_authenticated_users
 
   def index

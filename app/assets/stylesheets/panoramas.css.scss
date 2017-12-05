@@ -8,3 +8,17 @@
     display: inline-block;
   }
 }
+
+.panoramas {
+  .panorama div {
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    height: 150px;
+    width: 100%;
+  }
+}
+
+.panorama-form-actions {
+  margin-top: 1em;
+}
