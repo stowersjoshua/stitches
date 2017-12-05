@@ -62,13 +62,17 @@
   .navbar-nav > .dropdown > .dropdown-menu > li > a {
     color: $text-color;
   }
-  .navbar-nav > .dropdown > .dropdown-menu > li > a {
-    color: $body-bg;
-    &:hover, &:focus {
+
+  @media (max-width: 768px) {
+    .navbar-nav > .dropdown > .dropdown-menu > li > a {
       color: $body-bg;
-      opacity: 0.5;
+      &:hover, &:focus {
+        color: $body-bg;
+        opacity: 0.5;
+      }
     }
   }
+
   .navbar-toggle {
     .icon-bar {
       background-color: $body-bg;
