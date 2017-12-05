@@ -98,10 +98,9 @@
   margin-top: 0;
 }
 
-.flash-container {
-  position: absolute;
-  top: 20px;
-  left: 50%;
-  transform: translateX(-50%);
-  max-width: 400px;
+.alert-success, .alert-warning, .alert-error, .alert-info {
+  margin-top: 10px;
+  background-color: #5d68c1;
+  border-color: #4553c1;
+  color: #fafafa;
 }
