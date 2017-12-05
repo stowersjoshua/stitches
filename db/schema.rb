@@ -15,6 +15,7 @@ ActiveRecord::Schema.define(version: 20171201062915) do
 
   create_table "panoramas", force: :cascade do |t|
     t.string   "name"
+    t.integer  "column_count"
     t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -22,14 +23,6 @@ ActiveRecord::Schema.define(version: 20171201062915) do
   end
 
   add_index "panoramas", ["user_id"], name: "index_panoramas_on_user_id"
-
-  create_table "photos", force: :cascade do |t|
-    t.integer  "panorama_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "photos", ["panorama_id"], name: "index_photos_on_panorama_id"
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false

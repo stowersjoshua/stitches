@@ -116,7 +116,7 @@ class PanoramasController < ApplicationController
   end
 
   def panorama_params
-    params.require(:panorama).permit(:name, photos: [])
+    params.require(:panorama).permit(:name, :image_order, :column_count, photos: [])
   end
 end
 
